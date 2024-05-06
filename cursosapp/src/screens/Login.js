@@ -1,3 +1,5 @@
+// Login.js
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -6,17 +8,20 @@ import { auth } from '../utils/firebase'; // Asegúrate de importar auth tambié
 
 import colores from '../utils/colores';
 
-export default function Login() {
+export default function Login({ setIsLoggedIn }) {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-    
+
   const handleLogin = async () => {
     try {
       // Iniciar sesión con el correo electrónico y la contraseña
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-  
+
+      // Actualizar el estado de isLoggedIn a true después de un inicio de sesión exitoso
+      setIsLoggedIn(true);
+
       // Redirigir al usuario a la pantalla principal después de iniciar sesión
       navigation.navigate('Home');
     } catch (error) {
@@ -24,7 +29,6 @@ export default function Login() {
       Alert.alert("Error", "Correo electrónico o contraseña incorrectos.");
     }
   };
-  
 
   return (
     <View style={styles.container}>

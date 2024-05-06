@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import colores from '../../utils/colores';
@@ -28,23 +28,20 @@ const cursosData = [
   },
 ];
 
-const Home = () => {
-  const navigation = useNavigation();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+const Home = ({ navigation, isLoggedIn, setIsLoggedIn }) => {
+    // Función para manejar la navegación a la pantalla de inicio de sesión
+  const handleLogin = () => {
+    navigation.navigate('Login');
+  };
   // Función para manejar la navegación a la pantalla de registro
   const handleRegister = () => {
     navigation.navigate('Registro');
   };
 
-  // Función para manejar la navegación a la pantalla de inicio de sesión
-  const handleLogin = () => {
-    navigation.navigate('Login');
-  };
-
   // Función para manejar la navegación a la pantalla de editar perfil
   const handleEditProfile = () => {
     // Navegar a la pantalla de edición de perfil
+    // Aquí puedes agregar la navegación a la pantalla de edición de perfil
   };
 
   // Función para manejar la cerrar sesión
