@@ -1,0 +1,7 @@
+export default{
+    COLOR_CELESTE: '#106DDE',
+    COLOR_MORADO:'#5000F5',
+    COLOR_VERDE:'#06DE90',
+    COLOR_ANARANJADO:'#FC6536',
+    COLOR_BLANCO:"#EEF9FF"
+    }
