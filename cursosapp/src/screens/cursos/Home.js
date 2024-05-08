@@ -29,7 +29,7 @@ const Home = ({ navigation, isLoggedIn, setIsLoggedIn }) => {
   };
 
   const renderCursoItem = ({ item }) => (
-    <TouchableOpacity style={styles.cursoItem}>
+    <TouchableOpacity style={styles.cursoItem} onPress={() => navigation.navigate('DetalleCurso', { curso: item })}>
       <Image source={{ uri: item.imagen }} style={styles.cursoImagen} />
       <View style={styles.cursoInfo}>
         <Text style={styles.cursoNombre}>{item.nombre}</Text>

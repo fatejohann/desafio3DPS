@@ -7,6 +7,7 @@ import LoginScreen from './src/screens/Login';
 import RegistroScreen from './src/screens/Registro';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RegistroCursos from './src/screens/cursos/RegistroCursos';
+import DetalleCurso from './src/screens/cursos/DetalleCurso';
 
 const Stack = createStackNavigator();
 
@@ -108,7 +109,7 @@ export default function App() {
         <Stack.Screen name="RegistroCursos">
   {(props) => <RegistroCursos {...props} onSubmit={handleSubmit} />}
 </Stack.Screen>
-
+<Stack.Screen name="DetalleCurso" component={DetalleCurso} />
       </Stack.Navigator>
     </NavigationContainer>
   );
