@@ -1,5 +1,5 @@
 // App.js
-
+import { StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
