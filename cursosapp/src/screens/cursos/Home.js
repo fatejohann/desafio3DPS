@@ -11,9 +11,6 @@ const cursosData = [
     descripcion: 'Aprende a programar desde cero',
     precio: '$99',
     imagen: 'https://via.placeholder.com/150',
-    duracion: '10 semanas',
-    fechaInicio: '01/05/2024',
-    fechaFin: '10/07/2024',
   },
   {
     id: '2',
@@ -21,9 +18,6 @@ const cursosData = [
     descripcion: 'Domina las herramientas de diseño',
     precio: '$79',
     imagen: 'https://via.placeholder.com/150',
-    duracion: '8 semanas',
-    fechaInicio: '15/05/2024',
-    fechaFin: '05/07/2024',
   },
   {
     id: '3',
@@ -31,9 +25,6 @@ const cursosData = [
     descripcion: 'Aprende estrategias de marketing en línea',
     precio: '$129',
     imagen: 'https://via.placeholder.com/150',
-    duracion: '12 semanas',
-    fechaInicio: '20/05/2024',
-    fechaFin: '15/08/2024',
   },
 ];
 
@@ -51,9 +42,6 @@ const Home = ({ navigation, isLoggedIn, setIsLoggedIn }) => {
         <Text style={styles.cursoNombre}>{item.nombre}</Text>
         <Text style={styles.cursoDescripcion}>{item.descripcion}</Text>
         <Text style={styles.cursoPrecio}>{item.precio}</Text>
-        <Text style={styles.cursoDetalle}>Duración: {item.duracion}</Text>
-        <Text style={styles.cursoDetalle}>Fecha de inicio: {item.fechaInicio}</Text>
-        <Text style={styles.cursoDetalle}>Fecha de fin: {item.fechaFin}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -159,11 +147,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: colores.COLOR_MORADO,
-    marginTop: 5,
-  },
-  cursoDetalle: {
-    fontSize: 14,
-    color: '#888',
     marginTop: 5,
   },
 });

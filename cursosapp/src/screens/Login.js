@@ -1,5 +1,3 @@
-// Login.js
-
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -8,7 +6,7 @@ import { auth } from '../utils/firebase'; // Asegúrate de importar auth tambié
 
 import colores from '../utils/colores';
 
-export default function Login({ setIsLoggedIn }) {
+export default function LoginScreen({ setIsLoggedIn }) {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,7 +27,6 @@ export default function Login({ setIsLoggedIn }) {
       Alert.alert("Error", "Correo electrónico o contraseña incorrectos.");
     }
   };
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -57,6 +54,7 @@ export default function Login({ setIsLoggedIn }) {
           <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
             <Text style={styles.buttonText}>INICIAR SESIÓN</Text>
           </TouchableOpacity>
+          {/* Este botón debería llevar al usuario a la pantalla de registro */}
           <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Registro')}>
             <Text style={styles.buttonText}>REGISTRARSE</Text>
           </TouchableOpacity>
