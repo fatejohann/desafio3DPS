@@ -46,7 +46,6 @@ const Home = ({ navigation, isLoggedIn, setIsLoggedIn }) => {
 
   // Función para manejar la cerrar sesión
   const handleLogout = () => {
-    // Realizar las acciones necesarias para cerrar sesión, como limpiar el estado de autenticación, etc.
     setIsLoggedIn(false);
   };
 
