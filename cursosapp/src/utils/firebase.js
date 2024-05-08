@@ -36,4 +36,17 @@ const guardarUsuarioEnFirestore = async (uid, nombre) => {
   }
 };
 
-export { auth, db, guardarUsuarioEnFirestore };
+// Función para agregar un curso a la colección "cursos" en Firestore
+const agregarCursoAColeccion = async (curso) => {
+  try {
+    const docRef = await addDoc(collection(db, "cursos"), curso);
+    console.log("Curso agregado con ID: ", docRef.id);
+  } catch (error) {
+    console.error("Error al agregar curso: ", error);
+  }
+};
+
+
+
+
+export { auth, db, guardarUsuarioEnFirestore, agregarCursoAColeccion };

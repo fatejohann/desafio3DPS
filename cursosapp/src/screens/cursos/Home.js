@@ -1,38 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import colores from '../../utils/colores';
 
-// Array de cursos estáticos
-const cursosData = [
-  {
-    id: '1',
-    nombre: 'Curso de Programación',
-    descripcion: 'Aprende a programar desde cero',
-    precio: '$99',
-    imagen: 'https://via.placeholder.com/150',
-  },
-  {
-    id: '2',
-    nombre: 'Curso de Diseño Gráfico',
-    descripcion: 'Domina las herramientas de diseño',
-    precio: '$79',
-    imagen: 'https://via.placeholder.com/150',
-  },
-  {
-    id: '3',
-    nombre: 'Curso de Marketing Digital',
-    descripcion: 'Aprende estrategias de marketing en línea',
-    precio: '$129',
-    imagen: 'https://via.placeholder.com/150',
-  },
-];
-
 const Home = ({ navigation, isLoggedIn, setIsLoggedIn }) => {
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [cursosData, setCursosData] = useState([]);
+
+  useEffect(() => {
+    const fetchCursos = async () => {
+      const db = getFirestore();
+      const cursosCollection = collection(db, 'cursos');
+      const cursosSnapshot = await getDocs(cursosCollection);
+      const cursosList = cursosSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setCursosData(cursosList);
+    };
+
+    fetchCursos();
+  }, []);
 
   const handleSearch = (text) => {
     setSearchQuery(text);
+  };
+
+  const handleRegistroCursos = () => {
+    navigation.navigate('RegistroCursos');
   };
 
   const renderCursoItem = ({ item }) => (
@@ -70,6 +63,9 @@ const Home = ({ navigation, isLoggedIn, setIsLoggedIn }) => {
           </View>
         )}
       </View>
+      <TouchableOpacity style={styles.button} onPress={handleRegistroCursos}>
+        <Text style={styles.buttonText}>Registrar Cursos</Text>
+      </TouchableOpacity>
       <TextInput
         style={styles.searchInput}
         value={searchQuery}

@@ -6,6 +6,7 @@ import HomeScreen from './src/screens/cursos/Home';
 import LoginScreen from './src/screens/Login';
 import RegistroScreen from './src/screens/Registro';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import RegistroCursos from './src/screens/cursos/RegistroCursos';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,41 @@ export default function App() {
       await AsyncStorage.setItem('isLoggedIn', JSON.stringify(value));
     } catch (error) {
       console.error('Error al guardar isLoggedIn en AsyncStorage:', error);
+    }
+  };
+  const handleSubmit = () => {
+    const newCurso = {
+      nombre,
+      descripcion,
+      precio,
+      duracion,
+      fechaInicio,
+      fechaFin,
+      categoria
+    };
+  
+    // Si se proporciona un curso existente, actualiza el curso en la base de datos
+    if (curso) {
+      db.collection('cursos').doc(curso.id).update(newCurso)
+        .then(() => {
+          Alert.alert('Éxito', 'Curso actualizado correctamente');
+          onSubmit();
+        })
+        .catch((error) => {
+          console.error('Error al actualizar el curso:', error);
+          Alert.alert('Error', 'Hubo un problema al actualizar el curso');
+        });
+    } else {
+      // Si no se proporciona un curso existente, agrega un nuevo curso a la base de datos
+      agregarCursoAColeccion(newCurso)
+        .then(() => {
+          Alert.alert('Éxito', 'Curso agregado correctamente');
+          onSubmit();
+        })
+        .catch((error) => {
+          console.error('Error al agregar el curso:', error);
+          Alert.alert('Error', 'Hubo un problema al agregar el curso');
+        });
     }
   };
 
@@ -69,6 +105,10 @@ export default function App() {
           )}
         </Stack.Screen>
         <Stack.Screen name="Registro" component={RegistroScreen} />
+        <Stack.Screen name="RegistroCursos">
+  {(props) => <RegistroCursos {...props} onSubmit={handleSubmit} />}
+</Stack.Screen>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
